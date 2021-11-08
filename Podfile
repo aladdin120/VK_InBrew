@@ -7,4 +7,10 @@ target 'InBrew' do
 
   # Pods for InBrew
   pod 'PinLayout'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'IQKeyboardManagerSwift'
 end
