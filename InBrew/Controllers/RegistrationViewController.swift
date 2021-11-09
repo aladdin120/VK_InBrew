@@ -188,26 +188,49 @@ final class RegistrationViewController: UIViewController {
         animateButtonOpacity(button: signUpButton)
         guard let username = usernameTextField.text,
               let email = emailTextField.text,
-              let password = passwordTextField.text else {
+              let password = passwordTextField.text,
+              !username.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty else {
+            self.signUpDescription.text = "Empty user fields!"
+            self.signUpDescription.textColor = .fail
             print("[DEBUG]: \(FirebaseError.emptyFields)")
             return
         }
         
-        registrationModel.signUp(username: username,
-                                 email: email,
-                                 password: password) { newUser in
-            switch newUser {
-            case .success(_):
-                let authViewController = AuthViewController()
-                authViewController.modalPresentationStyle = .fullScreen
-                self.present(authViewController, animated: true, completion: .none)
-            case .failure(_):
-                self.signUpDescription.text = "Bad information about user"
-                self.signUpDescription.textColor = .fail
-                print("[DEBUG]: \(FirebaseError.emptyFields)")
+        let alertTitle = "18+"
+        let alertMessage = "Are you over 18 years old?"
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: { [weak self] action in
+            guard let self = self else {
+                return
             }
             
-        }
+            self.registrationModel.signUp(username: username,
+                                     email: email,
+                                     password: password) { newUser in
+                switch newUser {
+                case .success(_):
+                    let authViewController = AuthViewController()
+                    authViewController.modalPresentationStyle = .fullScreen
+                    self.present(authViewController, animated: true, completion: .none)
+                case .failure(_):
+                    self.signUpDescription.text = "Bad information about user"
+                    self.signUpDescription.textColor = .fail
+                    print("[DEBUG]: \(FirebaseError.emptyFields)")
+                }
+                
+            }
+        }))
+
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in
+            self.signUpDescription.text = "Sorry, but you are too young!"
+            self.signUpDescription.textColor = .fail
+        }))
+        self.present(alert, animated: true, completion: nil)
+
+        
+        
     }
     
     @objc
