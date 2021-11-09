@@ -190,7 +190,7 @@ final class AuthViewController: UIViewController {
             case .success(_):
                 let mainTabBarController = MainTabBarController()
                 mainTabBarController.modalPresentationStyle = .fullScreen
-                self?.present(mainTabBarController, animated: true, completion: nil)
+                self?.present(mainTabBarController, animated: false, completion: nil)
                 
             case .failure(_):
                 self?.loginDescription.text = "Bad email or password"
