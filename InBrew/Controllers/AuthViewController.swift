@@ -192,6 +192,8 @@ final class AuthViewController: UIViewController {
                 mainTabBarController.modalPresentationStyle = .fullScreen
                 self?.present(mainTabBarController, animated: false, completion: nil)
                 
+                UserDefaults.standard.setValue(true, forKey: "isAuth")
+                
             case .failure(_):
                 self?.loginDescription.text = "Bad email or password"
                 self?.loginDescription.textColor = .fail

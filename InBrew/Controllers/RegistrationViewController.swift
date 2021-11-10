@@ -213,7 +213,10 @@ final class RegistrationViewController: UIViewController {
                 case .success(_):
                     let authViewController = AuthViewController()
                     authViewController.modalPresentationStyle = .fullScreen
-                    self.present(authViewController, animated: true, completion: .none)
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    UserDefaults.standard.setValue(true, forKey: "isAuth")
+                    
                 case .failure(_):
                     self.signUpDescription.text = "Bad information about user"
                     self.signUpDescription.textColor = .fail
