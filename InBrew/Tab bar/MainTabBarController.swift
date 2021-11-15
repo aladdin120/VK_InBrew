@@ -40,7 +40,7 @@ final class MainTabBarController: UITabBarController {
                             categoriesViewController,
                             addBeerViewController,
                             favouriteViewController,
-                            profileViewController],
+                            profileViewController].map { UINavigationController(rootViewController: $0) },
                            animated: false)
     }
 }
