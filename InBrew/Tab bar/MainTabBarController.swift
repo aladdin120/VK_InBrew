@@ -8,11 +8,11 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-    private let homeViewController = HomeViewController()
-    private let categoriesViewController = CategoriesViewController()
-    private let addBeerViewController = AddBeerViewController()
-    private let favouriteViewController = FavouriteViewController()
-    private let profileViewController = ProfileViewController()
+    private let homeViewController = UINavigationController(rootViewController: HomeViewController())
+    private let categoriesViewController = UINavigationController(rootViewController: CategoriesViewController())
+    private let addBeerViewController = UINavigationController(rootViewController: AddBeerViewController())
+    private let favouriteViewController = UINavigationController(rootViewController: FavouriteViewController())
+    private let profileViewController = UINavigationController(rootViewController: ProfileViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
