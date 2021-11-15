@@ -32,6 +32,8 @@
 		5C87A233272B160400316C63 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C87A22E272B160400316C63 /* Comfortaa-Bold.ttf */; };
 		5C9EBFA2272AD1460049E9C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */; };
 		5C9EBFA4272AD1AF0049E9C6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */; };
+		5CABA4272742ADEE002E5B2D /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CABA4262742ADEE002E5B2D /* DatabaseModel.swift */; };
+		5CD368A9273C50C400E8EB4D /* BeerCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD368A8273C50C400E8EB4D /* BeerCardViewController.swift */; };
 		FCE9CC8091B7C0E945AC9C56 /* Pods_InBrew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE9461BFA5E1BA8EA943DD0 /* Pods_InBrew.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		5C87A22E272B160400316C63 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Bold.ttf"; path = "../../../../Downloads/Comfortaa/static/Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		5CABA4262742ADEE002E5B2D /* DatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
+		5CD368A8273C50C400E8EB4D /* BeerCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCardViewController.swift; sourceTree = "<group>"; };
 		BB2C1DB8D08B3FCAE85004F1 /* Pods-InBrew.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InBrew.debug.xcconfig"; path = "Target Support Files/Pods-InBrew/Pods-InBrew.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,9 +104,8 @@
 		5C3E7EA32732E88B00FD779C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5C3E7EA42732E8AB00FD779C /* AuthFirebaseModel.swift */,
 				5C3E7EA92732F19C00FD779C /* UserModel.swift */,
-				5C3E7EAF2738102C00FD779C /* RegistrationFirebaseModel.swift */,
+				5CABA4262742ADEE002E5B2D /* DatabaseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +132,9 @@
 		5C7D88972724B8D1009D1C6E /* InBrew */ = {
 			isa = PBXGroup;
 			children = (
+				5CABA42C2742CEFA002E5B2D /* BeerCard */,
+				5CABA42A2742CEC5002E5B2D /* Registration */,
+				5CABA4282742CE51002E5B2D /* Authorization */,
 				5C30A61A27387D4000DF5F70 /* UIViewController+Extensions */,
 				5C3E7EA62732ECCF00FD779C /* Errors */,
 				5C3E7EA32732E88B00FD779C /* Models */,
@@ -162,8 +168,6 @@
 				5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */,
 				5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */,
 				5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */,
-				5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */,
-				5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -194,6 +198,48 @@
 				5C87A22B272B160400316C63 /* Comfortaa-SemiBold.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		5CABA4282742CE51002E5B2D /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				5CABA4292742CE91002E5B2D /* Model */,
+				5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		5CABA4292742CE91002E5B2D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C3E7EA42732E8AB00FD779C /* AuthFirebaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CABA42A2742CEC5002E5B2D /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				5CABA42B2742CEDE002E5B2D /* Model */,
+				5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		5CABA42B2742CEDE002E5B2D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C3E7EAF2738102C00FD779C /* RegistrationFirebaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CABA42C2742CEFA002E5B2D /* BeerCard */ = {
+			isa = PBXGroup;
+			children = (
+				5CD368A8273C50C400E8EB4D /* BeerCardViewController.swift */,
+			);
+			path = BeerCard;
 			sourceTree = "<group>";
 		};
 		DF6A5AB5C04398C3F22204A7 /* Frameworks */ = {
@@ -336,6 +382,8 @@
 				5C3E7EB02738102C00FD779C /* RegistrationFirebaseModel.swift in Sources */,
 				5C3E7EAA2732F19C00FD779C /* UserModel.swift in Sources */,
 				5C7D88B82724BC8A009D1C6E /* FavouriteViewController.swift in Sources */,
+				5CABA4272742ADEE002E5B2D /* DatabaseModel.swift in Sources */,
+				5CD368A9273C50C400E8EB4D /* BeerCardViewController.swift in Sources */,
 				5C7D88BA2724BCE9009D1C6E /* ProfileViewController.swift in Sources */,
 				5C87A228272B13B500316C63 /* Color+Extension.swift in Sources */,
 				5C3E7EA52732E8AB00FD779C /* AuthFirebaseModel.swift in Sources */,

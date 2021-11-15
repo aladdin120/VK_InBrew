@@ -9,5 +9,6 @@ enum FirebaseError: Error {
     case badLoginOrPass
     case notFindUser
     case emptyFields
+    case badDataDuringRegistration
 }
 
