@@ -12,5 +12,6 @@ target 'InBrew' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'Kingfisher'
   pod 'IQKeyboardManagerSwift'
 end
