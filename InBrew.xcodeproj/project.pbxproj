@@ -192,7 +192,6 @@
 				5C7D88972724B8D1009D1C6E /* InBrew */,
 				5C63C31A2724C27400ABD33C /* InBrew.app */,
 				39C6785BC5A3646A8FC6F216 /* Pods */,
-				5C0C27BB27432F680036ACCD /* fonts */,
 				DF6A5AB5C04398C3F22204A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -212,6 +211,7 @@
 				5C7D88AE2724B999009D1C6E /* Tab bar */,
 				5C87A226272B135B00316C63 /* Color+Extensions */,
 				5C7D88AC2724B927009D1C6E /* Supporting files */,
+				5C0C27BB27432F680036ACCD /* fonts */,
 			);
 			path = InBrew;
 			sourceTree = "<group>";
