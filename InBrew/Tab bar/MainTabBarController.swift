@@ -17,8 +17,8 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.backgroundColor = .white
-        UITabBar.appearance().tintColor = .systemYellow
+        tabBar.backgroundColor = .background
+        UITabBar.appearance().tintColor = .primary
 
         setupTabBar()
     }
@@ -40,7 +40,7 @@ final class MainTabBarController: UITabBarController {
                             categoriesViewController,
                             addBeerViewController,
                             favouriteViewController,
-                            profileViewController].map { UINavigationController(rootViewController: $0) },
+                            profileViewController],
                            animated: false)
     }
 }
