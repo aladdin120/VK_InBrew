@@ -19,7 +19,10 @@ final class AuthFirebaseModel {
                 return
             }
             
-            let findUser: UserModel = UserModel.init(uid: userUID, email: userEmail)
+            let findUser: UserModel = UserModel.init(uid: userUID,
+                                                     email: userEmail,
+                                                     name: "",
+                                                     avatar: "")
             completion(.success(findUser))
         }
     }

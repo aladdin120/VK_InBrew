@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1D98CD274323E500BE7328 /* RegistrationFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C5274323E500BE7328 /* RegistrationFirebaseModel.swift */; };
+		5C1D98CE274323E500BE7328 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C6274323E500BE7328 /* RegistrationViewController.swift */; };
+		5C1D98CF274323E500BE7328 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C8274323E500BE7328 /* AuthViewController.swift */; };
+		5C1D98D0274323E500BE7328 /* AuthFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98CA274323E500BE7328 /* AuthFirebaseModel.swift */; };
+		5C1D98D1274323E500BE7328 /* BeerCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98CC274323E500BE7328 /* BeerCardViewController.swift */; };
+		5C1D98D32743249100BE7328 /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98D22743249100BE7328 /* DatabaseModel.swift */; };
 		5C30A61C27387D7900DF5F70 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30A61B27387D7900DF5F70 /* UIViewController+Extensions.swift */; };
-		5C3E7EA52732E8AB00FD779C /* AuthFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EA42732E8AB00FD779C /* AuthFirebaseModel.swift */; };
 		5C3E7EA82732ECF200FD779C /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EA72732ECF200FD779C /* FirebaseError.swift */; };
 		5C3E7EAA2732F19C00FD779C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EA92732F19C00FD779C /* UserModel.swift */; };
-		5C3E7EB02738102C00FD779C /* RegistrationFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EAF2738102C00FD779C /* RegistrationFirebaseModel.swift */; };
 		5C7D88992724B8D1009D1C6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88982724B8D1009D1C6E /* AppDelegate.swift */; };
 		5C7D889B2724B8D1009D1C6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D889A2724B8D1009D1C6E /* SceneDelegate.swift */; };
 		5C7D88A02724B8D1009D1C6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D889E2724B8D1009D1C6E /* Main.storyboard */; };
@@ -24,8 +28,6 @@
 		5C7D88B82724BC8A009D1C6E /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */; };
 		5C7D88BA2724BCE9009D1C6E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */; };
 		5C87A228272B13B500316C63 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87A227272B13B500316C63 /* Color+Extension.swift */; };
-		5C9EBFA2272AD1460049E9C6 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */; };
-		5C9EBFA4272AD1AF0049E9C6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */; };
 		8447CFFE272F0D2200E4B280 /* CategoryCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447CFFD272F0D2000E4B280 /* CategoryCellCollectionViewCell.swift */; };
 		844ED15D27385AC9007AC2D6 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844ED15C27385AC8007AC2D6 /* ProductCollectionViewCell.swift */; };
 		844ED16027388B96007AC2D6 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844ED15F27388B95007AC2D6 /* Product.swift */; };
@@ -40,11 +42,15 @@
 /* Begin PBXFileReference section */
 		40171637B94CC84973CD5C3A /* Pods-InBrew.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InBrew.release.xcconfig"; path = "Target Support Files/Pods-InBrew/Pods-InBrew.release.xcconfig"; sourceTree = "<group>"; };
 		4FE9461BFA5E1BA8EA943DD0 /* Pods_InBrew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InBrew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C1D98C5274323E500BE7328 /* RegistrationFirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationFirebaseModel.swift; sourceTree = "<group>"; };
+		5C1D98C6274323E500BE7328 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		5C1D98C8274323E500BE7328 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		5C1D98CA274323E500BE7328 /* AuthFirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthFirebaseModel.swift; sourceTree = "<group>"; };
+		5C1D98CC274323E500BE7328 /* BeerCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerCardViewController.swift; sourceTree = "<group>"; };
+		5C1D98D22743249100BE7328 /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		5C30A61B27387D7900DF5F70 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		5C3E7EA42732E8AB00FD779C /* AuthFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFirebaseModel.swift; sourceTree = "<group>"; };
 		5C3E7EA72732ECF200FD779C /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		5C3E7EA92732F19C00FD779C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		5C3E7EAF2738102C00FD779C /* RegistrationFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFirebaseModel.swift; sourceTree = "<group>"; };
 		5C63C31A2724C27400ABD33C /* InBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C7D88982724B8D1009D1C6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C7D889A2724B8D1009D1C6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,8 +65,6 @@
 		5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5C87A227272B13B500316C63 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		8447CFFD272F0D2000E4B280 /* CategoryCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		844ED15C27385AC8007AC2D6 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		844ED15F27388B95007AC2D6 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -93,6 +97,48 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5C1D98C3274323E500BE7328 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				5C1D98C4274323E500BE7328 /* Model */,
+				5C1D98C6274323E500BE7328 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		5C1D98C4274323E500BE7328 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C1D98C5274323E500BE7328 /* RegistrationFirebaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5C1D98C7274323E500BE7328 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				5C1D98C8274323E500BE7328 /* AuthViewController.swift */,
+				5C1D98C9274323E500BE7328 /* Model */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		5C1D98C9274323E500BE7328 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C1D98CA274323E500BE7328 /* AuthFirebaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5C1D98CB274323E500BE7328 /* BeerCard */ = {
+			isa = PBXGroup;
+			children = (
+				5C1D98CC274323E500BE7328 /* BeerCardViewController.swift */,
+			);
+			path = BeerCard;
+			sourceTree = "<group>";
+		};
 		5C30A61A27387D4000DF5F70 /* UIViewController+Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,9 +150,8 @@
 		5C3E7EA32732E88B00FD779C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5C3E7EA42732E8AB00FD779C /* AuthFirebaseModel.swift */,
+				5C1D98D22743249100BE7328 /* DatabaseModel.swift */,
 				5C3E7EA92732F19C00FD779C /* UserModel.swift */,
-				5C3E7EAF2738102C00FD779C /* RegistrationFirebaseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,6 +177,9 @@
 		5C7D88972724B8D1009D1C6E /* InBrew */ = {
 			isa = PBXGroup;
 			children = (
+				5C1D98C7274323E500BE7328 /* Authorization */,
+				5C1D98CB274323E500BE7328 /* BeerCard */,
+				5C1D98C3274323E500BE7328 /* Registration */,
 				84195D652735573E00255088 /* Home */,
 				844ED15A273852DD007AC2D6 /* Search */,
 				5C30A61A27387D4000DF5F70 /* UIViewController+Extensions */,
@@ -165,8 +213,6 @@
 				5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */,
 				5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */,
 				5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */,
-				5C9EBFA1272AD1460049E9C6 /* AuthViewController.swift */,
-				5C9EBFA3272AD1AF0049E9C6 /* RegistrationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -365,29 +411,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C1D98CF274323E500BE7328 /* AuthViewController.swift in Sources */,
 				5C3E7EA82732ECF200FD779C /* FirebaseError.swift in Sources */,
 				5C30A61C27387D7900DF5F70 /* UIViewController+Extensions.swift in Sources */,
+				5C1D98D0274323E500BE7328 /* AuthFirebaseModel.swift in Sources */,
 				5C7D88B22724BAC9009D1C6E /* HomeViewController.swift in Sources */,
+				5C1D98CD274323E500BE7328 /* RegistrationFirebaseModel.swift in Sources */,
 				844ED16027388B96007AC2D6 /* Product.swift in Sources */,
 				844ED15D27385AC9007AC2D6 /* ProductCollectionViewCell.swift in Sources */,
 				84DF841F27300379001D53DF /* Category.swift in Sources */,
 				5C7D88B42724BB3F009D1C6E /* CategoriesViewController.swift in Sources */,
+				5C1D98D32743249100BE7328 /* DatabaseModel.swift in Sources */,
 				5C7D88992724B8D1009D1C6E /* AppDelegate.swift in Sources */,
 				849A30B027333CCA005F9666 /* BannerCollectionViewCell.swift in Sources */,
 				5C7D88B62724BBDA009D1C6E /* AddBeerViewController.swift in Sources */,
 				84DF8423273024D1001D53DF /* CategoryManager.swift in Sources */,
-				5C9EBFA4272AD1AF0049E9C6 /* RegistrationViewController.swift in Sources */,
+				5C1D98D1274323E500BE7328 /* BeerCardViewController.swift in Sources */,
 				5C7D88B02724B9F8009D1C6E /* MainTabBarController.swift in Sources */,
 				5C7D889B2724B8D1009D1C6E /* SceneDelegate.swift in Sources */,
-				5C3E7EB02738102C00FD779C /* RegistrationFirebaseModel.swift in Sources */,
 				5C3E7EAA2732F19C00FD779C /* UserModel.swift in Sources */,
 				5C7D88B82724BC8A009D1C6E /* FavouriteViewController.swift in Sources */,
 				5C7D88BA2724BCE9009D1C6E /* ProfileViewController.swift in Sources */,
 				8447CFFE272F0D2200E4B280 /* CategoryCellCollectionViewCell.swift in Sources */,
+				5C1D98CE274323E500BE7328 /* RegistrationViewController.swift in Sources */,
 				844ED162273891B6007AC2D6 /* ProductsManager.swift in Sources */,
 				5C87A228272B13B500316C63 /* Color+Extension.swift in Sources */,
-				5C3E7EA52732E8AB00FD779C /* AuthFirebaseModel.swift in Sources */,
-				5C9EBFA2272AD1460049E9C6 /* AuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

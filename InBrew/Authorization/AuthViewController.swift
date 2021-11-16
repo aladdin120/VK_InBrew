@@ -66,6 +66,9 @@ final class AuthViewController: UIViewController {
             ($0).borderStyle = .none
          }
         
+//        let emailText = UserDefaults.standard.string(forKey: "isAuth")
+//        emailTextField.text = emailText
+        
         emailTextField.placeholder = "Email"
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
@@ -191,6 +194,8 @@ final class AuthViewController: UIViewController {
                 let mainTabBarController = MainTabBarController()
                 mainTabBarController.modalPresentationStyle = .fullScreen
                 self?.present(mainTabBarController, animated: false, completion: nil)
+//                UserDefaults.standard.set(email, forKey: "isAuth")
+                UserDefaults.standard.setValue(true, forKey: "isAuth")
                 
             case .failure(_):
                 self?.loginDescription.text = "Bad email or password"

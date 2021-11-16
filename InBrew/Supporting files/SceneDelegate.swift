@@ -14,14 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        let isLogined = UserDefaults.standard.bool(forKey: "isAuth")
+        
         if let windowScene = scene as? UIWindowScene {
-            let userIsAuth: Bool = false //Auth.auth().currentUser != nil
             
             let authViewController = AuthViewController()
             let mainTabBarController = MainTabBarController()
             
             window = UIWindow(windowScene: windowScene)
-            if userIsAuth {
+            if isLogined {
                 window?.rootViewController = mainTabBarController
             } else {
                 window?.rootViewController = authViewController

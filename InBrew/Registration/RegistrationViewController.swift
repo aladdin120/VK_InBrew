@@ -106,9 +106,14 @@ final class RegistrationViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        var marginTop: CGFloat = view.pin.safeArea.top + 11
+        
+        if let navHeight = navigationController?.navigationBar.frame.height {
+            marginTop -= navHeight
+        }
         
         logoImageView.pin
-            .top(view.pin.safeArea)
+            .top(marginTop)
             .height(110)
             .width(90)
             .hCenter()
@@ -213,7 +218,10 @@ final class RegistrationViewController: UIViewController {
                 case .success(_):
                     let authViewController = AuthViewController()
                     authViewController.modalPresentationStyle = .fullScreen
-                    self.present(authViewController, animated: true, completion: .none)
+                    self.dismiss(animated: true, completion: nil)
+//                    UserDefaults.standard.set(email, forKey: "isAuth")
+                    UserDefaults.standard.setValue(true, forKey: "isAuth")
+                    
                 case .failure(_):
                     self.signUpDescription.text = "Bad information about user"
                     self.signUpDescription.textColor = .fail
