@@ -12,6 +12,7 @@
 		5C0C27CF2743358E0036ACCD /* Comfortaa-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0C27C8274333560036ACCD /* Comfortaa-Medium.ttf */; };
 		5C0C27D02743358E0036ACCD /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0C27CB274333560036ACCD /* Comfortaa-Regular.ttf */; };
 		5C0C27D12743358E0036ACCD /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0C27C9274333560036ACCD /* Comfortaa-SemiBold.ttf */; };
+		5C1C68BD2744276400C71368 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C68BC2744276400C71368 /* HomeViewController.swift */; };
 		5C1D98CD274323E500BE7328 /* RegistrationFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C5274323E500BE7328 /* RegistrationFirebaseModel.swift */; };
 		5C1D98CE274323E500BE7328 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C6274323E500BE7328 /* RegistrationViewController.swift */; };
 		5C1D98CF274323E500BE7328 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98C8274323E500BE7328 /* AuthViewController.swift */; };
@@ -27,7 +28,6 @@
 		5C7D88A22724B8D3009D1C6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D88A12724B8D3009D1C6E /* Assets.xcassets */; };
 		5C7D88A52724B8D3009D1C6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D88A32724B8D3009D1C6E /* LaunchScreen.storyboard */; };
 		5C7D88B02724B9F8009D1C6E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88AF2724B9F8009D1C6E /* MainTabBarController.swift */; };
-		5C7D88B22724BAC9009D1C6E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B12724BAC9009D1C6E /* HomeViewController.swift */; };
 		5C7D88B42724BB3F009D1C6E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B32724BB3F009D1C6E /* CategoriesViewController.swift */; };
 		5C7D88B62724BBDA009D1C6E /* AddBeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */; };
 		5C7D88B82724BC8A009D1C6E /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */; };
@@ -52,6 +52,7 @@
 		5C0C27CA274333560036ACCD /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		5C0C27CB274333560036ACCD /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C0C27CC274333560036ACCD /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
+		5C1C68BC2744276400C71368 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5C1D98C5274323E500BE7328 /* RegistrationFirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationFirebaseModel.swift; sourceTree = "<group>"; };
 		5C1D98C6274323E500BE7328 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5C1D98C8274323E500BE7328 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		5C7D88A42724B8D3009D1C6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C7D88A62724B8D3009D1C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C7D88AF2724B9F8009D1C6E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		5C7D88B12724BAC9009D1C6E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../Controllers/HomeViewController.swift; sourceTree = "<group>"; };
 		5C7D88B32724BB3F009D1C6E /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeerViewController.swift; sourceTree = "<group>"; };
 		5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		84195D652735573E00255088 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				5C7D88B12724BAC9009D1C6E /* HomeViewController.swift */,
+				5C1C68BC2744276400C71368 /* HomeViewController.swift */,
 				84195D7227369DBA00255088 /* Model */,
 				84DF841D27300349001D53DF /* Cells */,
 			);
@@ -439,11 +439,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C1C68BD2744276400C71368 /* HomeViewController.swift in Sources */,
 				5C1D98CF274323E500BE7328 /* AuthViewController.swift in Sources */,
 				5C3E7EA82732ECF200FD779C /* FirebaseError.swift in Sources */,
 				5C30A61C27387D7900DF5F70 /* UIViewController+Extensions.swift in Sources */,
 				5C1D98D0274323E500BE7328 /* AuthFirebaseModel.swift in Sources */,
-				5C7D88B22724BAC9009D1C6E /* HomeViewController.swift in Sources */,
 				5C1D98CD274323E500BE7328 /* RegistrationFirebaseModel.swift in Sources */,
 				844ED16027388B96007AC2D6 /* Product.swift in Sources */,
 				844ED15D27385AC9007AC2D6 /* ProductCollectionViewCell.swift in Sources */,
