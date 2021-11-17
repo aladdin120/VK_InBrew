@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol CategoriesViewControllerInput: AnyObject {
+    func didReceive(_ products: [Product])
+}
+
 final class CategoriesViewController: UIViewController {
 
     private var beerCollection: UICollectionView?
     private let searchController = UISearchController(searchResultsController: nil)
+    private let refreshControl = UIRefreshControl()
+    
+    private let model: ProductsManagerProtocol = ProductsManager.shared
     
     //cells
     private let cellsOffset: CGFloat = 8
@@ -22,10 +29,24 @@ final class CategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        products = ProductsManager.shared.loadContent()
+        loadProducts()
         
         setupNavBarAndSc()
         setupCollection()
+        setupRefreshControl()
+    }
+    
+    func loadProducts() {
+        model.getAllBeer { [weak self] result in
+            switch result {
+            case .success(let dat):
+                self?.products = dat
+                self?.beerCollection?.reloadData()
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+            }
+        }
+        
     }
     
     func setupNavBarAndSc() {
@@ -33,11 +54,17 @@ final class CategoriesViewController: UIViewController {
         title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let sc = UISearchController(searchResultsController: nil)
-        navigationItem.searchController = sc
-        //searchController.searchBar.delegate = self
-//        searchController.searchBar.showsBookmarkButton = true
-//        searchController.searchBar.setImage(UIImage(named: "filter"), for: .bookmark, state: .normal)
+        navigationItem.searchController = searchController
+    }
+    
+    func setupRefreshControl() {
+        beerCollection?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        loadProducts()
+        sender.endRefreshing()
     }
     
     func setupCollection() {
@@ -49,6 +76,7 @@ final class CategoriesViewController: UIViewController {
         beerCollection.delegate = self
         beerCollection.dataSource = self
         beerCollection.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+        beerCollection.backgroundColor = .white
         
         view.addSubview(beerCollection)
     }
@@ -61,6 +89,7 @@ final class CategoriesViewController: UIViewController {
             .horizontally(5)
     }
 }
+
 
 extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

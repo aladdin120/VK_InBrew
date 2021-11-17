@@ -50,6 +50,7 @@ final class HomeViewController: UIViewController {
         MyCollectionView.dataSource = self
         MyCollectionView.delegate = self
         MyCollectionView.frame = view.bounds
+        MyCollectionView.backgroundColor = .white
         
         
         view.addSubview(MyCollectionView)

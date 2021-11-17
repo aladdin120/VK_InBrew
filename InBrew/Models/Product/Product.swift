@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 struct Product {
+    let id: String
     let name: String
     let categories: String
     let price: String
+    let description: String
     let isFavourite: Bool
-    let iconUrl: URL?
 }
