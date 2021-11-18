@@ -170,6 +170,22 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
         filterContentForSearchText(searchText, scope: searchScope[selectedScope])
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var product: Product
+        
+        if isSearching {
+            product = searchedProducts[indexPath.item]
+        } else {
+            product = products[indexPath.item]
+        }
+        
+        let beerCardViewController = BeerCardViewController()
+        let navigationController = UINavigationController(rootViewController: beerCardViewController)
+        beerCardViewController.product = product
+        
+        present(navigationController, animated: true, completion: nil)
+    }
 }
 
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
