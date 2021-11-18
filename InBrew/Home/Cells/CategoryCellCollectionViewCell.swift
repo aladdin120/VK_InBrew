@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
+
+final class NetworkImageView: UIImageView {
+    func setURL(_ url: URL?) {
+        kf.setImage(with: url)
+    }
+}
 
 final class CategoryCellCollectionViewCell: UICollectionViewCell {
     

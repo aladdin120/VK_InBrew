@@ -202,7 +202,6 @@ final class AuthViewController: UIViewController {
                 self?.loginDescription.textColor = .fail
                 print("[DEBUG]: \(FirebaseError.badLoginOrPass)")
             }
-                
         }
     }
     
