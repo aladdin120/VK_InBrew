@@ -47,6 +47,7 @@ private final class ProductConverter {
         case country
         case price
         case description
+        case sort
     }
     
     func convertToProduct(from document: DocumentSnapshot) -> Product? {
@@ -54,10 +55,11 @@ private final class ProductConverter {
               let name = dict[Key.name.rawValue] as? String,
               let country = dict[Key.country.rawValue] as? String,
               let price = dict[Key.price.rawValue] as? String,
+              let sort = dict[Key.sort.rawValue] as? String,
               let description = dict[Key.description.rawValue] as? String else {
                   return nil
               }
         let id = document.documentID
-        return Product(id: id, name: name, categories: country, price: price, description: description, isFavourite: false)
+        return Product(id: id, name: name, categories: country, price: price, description: description, sort: sort, isFavourite: false, imageUrl: nil)
     }
 }

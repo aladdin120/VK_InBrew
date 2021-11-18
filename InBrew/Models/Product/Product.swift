@@ -14,5 +14,7 @@ struct Product {
     let categories: String
     let price: String
     let description: String
+    let sort: String
     let isFavourite: Bool
+    var imageUrl: URL?
 }
