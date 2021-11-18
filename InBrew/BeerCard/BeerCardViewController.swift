@@ -10,7 +10,7 @@ import PinLayout
 
 final class BeerCardViewController: UIViewController {
     private let scrollView = UIScrollView()
-    private let beerImage = UIImageView(image: UIImage(named: "beerTest.jpeg"))
+    private let beerImageView = UIImageView() //image: UIImage(named: "beerTest.jpeg"))
     private let beerTitleLabel = UILabel()
     private let likeOfBeerButton = UIButton()
     private let beerContryLabel = UILabel()
@@ -24,22 +24,32 @@ final class BeerCardViewController: UIViewController {
     private let goToReviewScreenImage = UIImageView(image: UIImage(systemName: "chevron.right"))
     private let addReviewButton = UIButton()
     
+    private let model: ImageLoaderProtocol = ImageLoader.shared
+    var product: Product? {
+        didSet {
+            guard let product = product else {
+                return
+            }
+
+            configure(with: product)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background
         
-        
         scrollView.alwaysBounceVertical = true
         
-        beerImage.contentMode = .scaleAspectFill
-        beerImage.clipsToBounds = true
-        beerImage.alpha = 0.9
-        beerImage.layer.cornerRadius = 25
-        beerImage.layer.masksToBounds = true
-        beerImage.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        beerImageView.contentMode = .scaleAspectFit
+        beerImageView.clipsToBounds = true
+        beerImageView.alpha = 0.9
+        beerImageView.layer.cornerRadius = 25
+        beerImageView.layer.masksToBounds = true
+        beerImageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-        beerTitleLabel.text = "Охота выдержанное выдержанное выдержанное выдержанное"
+        //beerTitleLabel.text = "Охота выдержанное выдержанное выдержанное выдержанное"
         beerTitleLabel.font = UIFont(name: "Comfortaa-Bold", size: 24)
         beerTitleLabel.textColor = .text
         beerTitleLabel.lineBreakMode = .byWordWrapping
@@ -52,11 +62,11 @@ final class BeerCardViewController: UIViewController {
         likeOfBeerButton.tintColor = .primary
         likeOfBeerButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         
-        beerContryLabel.text = "Russia"
+        //beerContryLabel.text = "Russia"
         beerContryLabel.font = UIFont(name: "Comfortaa-Bold", size: 16)
         beerContryLabel.textColor = .minorText
         
-        beerCostLabel.text = "45руб"
+        //beerCostLabel.text = "45руб"
         beerCostLabel.font = UIFont(name: "Comfortaa-Bold", size: 24)
         beerCostLabel.textColor = .text
         
@@ -68,7 +78,7 @@ final class BeerCardViewController: UIViewController {
         beerDetailTitleLable.font = UIFont(name: "Comfortaa-Bold", size: 16)
         beerDetailTitleLable.textColor = .text
         
-        beerDetailDescriptionLabel.text = "Strong, bottom-fermented dark beer with rich taste and seductive aroma."
+        //beerDetailDescriptionLabel.text = "Strong, bottom-fermented dark beer with rich taste and seductive aroma."
         beerDetailDescriptionLabel.font = UIFont(name: "Comfortaa-Bold", size: 13)
         beerDetailDescriptionLabel.textColor = .minorText
         beerDetailDescriptionLabel.lineBreakMode = .byWordWrapping
@@ -91,7 +101,7 @@ final class BeerCardViewController: UIViewController {
         addReviewButton.layer.cornerRadius = 19
         addReviewButton.addTarget(self, action: #selector(didTapWriteReviewButton), for: .touchUpInside)
         
-        [beerImage,
+        [beerImageView,
          beerTitleLabel,
          likeOfBeerButton,
          beerContryLabel,
@@ -107,6 +117,22 @@ final class BeerCardViewController: UIViewController {
             scrollView.addSubview($0)
         }
         view.addSubview(scrollView)
+    }
+    
+    func configure(with product: Product) {
+        beerTitleLabel.text = product.name
+        beerContryLabel.text = product.categories + "," + product.sort
+        beerCostLabel.text = product.price
+        beerDetailDescriptionLabel.text = product.description
+        model.getBeerImage(beerId: product.id) { [weak self] result in
+            switch result {
+            case .success(let img):
+                self?.beerImageView.image = img
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+                self?.beerImageView.image = UIImage(named: "defaultIcon")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,21 +152,21 @@ final class BeerCardViewController: UIViewController {
         scrollView.pin
             .all()
         
-        beerImage.pin
+        beerImageView.pin
             .top(-(navigationController?.navigationBar.frame.height  ?? 0) - view.pin.safeArea.top)
             .width(view.bounds.width)
             .height(view.bounds.width)
         
        
         likeOfBeerButton.pin
-            .below(of: beerImage)
+            .below(of: beerImageView)
             .marginTop(18)
             .right(19)
             .height(26)
             .width(31)
         
         beerTitleLabel.pin
-            .below(of: beerImage)
+            .below(of: beerImageView)
             .before(of: likeOfBeerButton)
             .width(view.bounds.width - likeOfBeerButton.frame.width)
             .minHeight(37)

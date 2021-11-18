@@ -10,5 +10,8 @@ enum FirebaseError: Error {
     case notFindUser
     case emptyFields
     case badDataDuringRegistration
+    case emptyDocumentData
+    case notFindDocument
+    case notFindData
 }
 

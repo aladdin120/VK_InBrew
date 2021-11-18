@@ -7,23 +7,19 @@
 
 import Foundation
 import UIKit
-import Kingfisher
 
-final class NetworkImageView: UIImageView {
-    func setURL(_ url: URL?) {
-        kf.setImage(with: url)
-    }
-}
 
 final class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ProductCollectionViewCell"
     
-    private let imageView = NetworkImageView()
+    private let imageView = UIImageView()
     private let nameLabel = UILabel()
     private let categoryLabel = UILabel()
     private let priceLabel = UILabel()
     private let favButton = UIButton()
+    
+    private let model: ImageLoaderProtocol = ImageLoader.shared
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,9 +69,17 @@ final class ProductCollectionViewCell: UICollectionViewCell {
     
     func configure(with product: Product) {
         nameLabel.text = product.name
-        categoryLabel.text = product.categories
+        categoryLabel.text = product.sort + ", " + product.categories
         priceLabel.text = product.price
-        imageView.setURL(product.iconUrl)
+        model.getBeerImage(beerId: product.id) { [weak self] result in
+            switch result {
+            case .success(let img):
+                self?.imageView.image = img
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+                self?.imageView.image = UIImage(named: "defaultIcon")
+            }
+        }
     }
     
     override func layoutSubviews() {
@@ -106,5 +110,11 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         favButton.pin
             .size(30)
             .bottomRight(10)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
     }
 }
