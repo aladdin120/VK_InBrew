@@ -13,7 +13,7 @@ final class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ProductCollectionViewCell"
     
-    private let imageView = NetworkImageView()
+    private let imageView = UIImageView()
     private let nameLabel = UILabel()
     private let categoryLabel = UILabel()
     private let priceLabel = UILabel()
@@ -80,16 +80,6 @@ final class ProductCollectionViewCell: UICollectionViewCell {
                 self?.imageView.image = UIImage(named: "defaultIcon")
             }
         }
-//        model.getBeerImageUrl(beerId: product.id) { [weak self] result in
-//            switch result {
-//            case .success(let url):
-//                self?.imageView.setURL(url)
-//            case .failure(let error):
-//                print("[DEBUG]: \(error)")
-//                self?.imageView.image = UIImage(named: "defaultIcon")
-//            }
-//
-//        }
     }
     
     override func layoutSubviews() {
