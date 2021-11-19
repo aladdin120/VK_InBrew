@@ -121,6 +121,14 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		5C1C68BE27442A6500C71368 /* Favourite */ = {
+			isa = PBXGroup;
+			children = (
+				5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */,
+			);
+			path = Favourite;
+			sourceTree = "<group>";
+		};
 		5C1D98C3274323E500BE7328 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +212,7 @@
 		5C7D88972724B8D1009D1C6E /* InBrew */ = {
 			isa = PBXGroup;
 			children = (
+				5C1C68BE27442A6500C71368 /* Favourite */,
 				5C1D98C7274323E500BE7328 /* Authorization */,
 				5C1D98CB274323E500BE7328 /* BeerCard */,
 				5C1D98C3274323E500BE7328 /* Registration */,
@@ -238,7 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */,
-				5C7D88B72724BC8A009D1C6E /* FavouriteViewController.swift */,
 				5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */,
 			);
 			path = Controllers;
