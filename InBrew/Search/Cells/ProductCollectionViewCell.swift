@@ -41,7 +41,7 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 2
-        contentView.layer.borderColor = UIColor.systemYellow.cgColor
+        contentView.layer.borderColor = UIColor.primary.cgColor
     }
     
     func setupImageView() {

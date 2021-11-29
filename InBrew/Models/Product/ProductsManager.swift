@@ -5,9 +5,8 @@
 //  Created by Fedo on 08.11.2021.
 //
 
-import Foundation
 import Firebase
-import FirebaseDatabase
+//import FirebaseDatabase
 import UIKit
 
 
@@ -20,7 +19,7 @@ class ProductsManager: ProductsManagerProtocol {
     
     private let database = Firestore.firestore()
     private let productConverter = ProductConverter()
-    
+    private let databaseModel: DatabaseModel = DatabaseModel()
     private init() {}
     
     func getAllBeer(completion: @escaping (Result<[Product], Error>) -> Void) {
@@ -34,11 +33,40 @@ class ProductsManager: ProductsManagerProtocol {
                 completion(.failure(FirebaseError.emptyDocumentData))
                 return
             }
-                        
-            let products = documents.compactMap { self?.productConverter.convertToProduct(from: $0) }
-            completion(.success(products))
+            
+            var favouriteArray: [String] = []
+            self?.databaseModel.getFavouriteBeerInDatabase { result in
+                switch result {
+                case .success(let favourite):
+                    favouriteArray = favourite
+                    let products = documents.compactMap { self?.productConverter.convertToProduct(from: $0, isFavourite: favouriteArray.contains($0.documentID)) }
+                    completion(.success(products))
+                    
+                case .failure(_):
+                    return
+                }
+            }
         }
     }
+    
+//    func isBeerFavourite(completion: @escaping (Result<[String], Error>) -> Void) {
+//        guard let UID = Auth.auth().currentUser?.uid else {
+//            print("[DEBUG]: \(FirebaseError.notFindUser)")
+//            return
+//        }
+//
+//        database.collection("users").document(UID).addSnapshotListener {querySnapshot, error in
+//            guard let querySnapshot = querySnapshot,
+//                  querySnapshot.exists else {
+//                completion(.failure(FirebaseError.emptyDocumentData))
+//                return
+//            }
+//
+//            let favouriteArray = querySnapshot.get("favourite") as? [String] ?? []
+//
+//            completion(.success(favouriteArray))
+//        }
+//    }
 }
 
 private final class ProductConverter {
@@ -50,7 +78,7 @@ private final class ProductConverter {
         case sort
     }
     
-    func convertToProduct(from document: DocumentSnapshot) -> Product? {
+    func convertToProduct(from document: DocumentSnapshot, isFavourite: Bool) -> Product? {
         guard let dict = document.data(),
               let name = dict[Key.name.rawValue] as? String,
               let country = dict[Key.country.rawValue] as? String,
@@ -60,6 +88,6 @@ private final class ProductConverter {
                   return nil
               }
         let id = document.documentID
-        return Product(id: id, name: name, categories: country, price: price, description: description, sort: sort, isFavourite: false, imageUrl: nil)
+        return Product(id: id, name: name, categories: country, price: price, description: description, sort: sort, isFavourite: isFavourite, imageUrl: nil)
     }
 }

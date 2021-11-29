@@ -182,6 +182,7 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let beerCardViewController = BeerCardViewController()
         let navigationController = UINavigationController(rootViewController: beerCardViewController)
+        navigationController.modalPresentationStyle = .fullScreen
         beerCardViewController.product = product
         
         present(navigationController, animated: true, completion: nil)
