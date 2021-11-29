@@ -68,6 +68,7 @@ final class AuthViewController: UIViewController {
         
 //        let emailText = UserDefaults.standard.string(forKey: "isAuth")
 //        emailTextField.text = emailText
+        emailTextField.autocapitalizationType = .none
         
         emailTextField.placeholder = "Email"
         passwordTextField.placeholder = "Password"

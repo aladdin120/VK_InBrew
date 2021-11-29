@@ -58,6 +58,7 @@ final class RegistrationViewController: UIViewController {
             ($0).textColor = .text
          }
         
+        emailTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
         
         [usernameSeparator,

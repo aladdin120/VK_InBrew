@@ -15,35 +15,43 @@ final class FavouriteViewController: UIViewController {
         
         return UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
     }()
-    
-    private var itemOfFav: UIButton = {
-        let button = UIButton()
-        button.setTitle("like", for: .normal)
-        button.backgroundColor = .fail
-        button.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
-        return button
+    private let emptyFavouriteLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You don't have favorite beer!"
+        label.font = UIFont(name: "Comfortaa-Bold", size: 18)
+        label.numberOfLines = 0
+        label.textColor = .minorText
+        
+        return label
     }()
+    private let cellsOffset: CGFloat = 8
+    private let cellHeight: CGFloat = 230
+    private let numberOfItemsPerRowProducts: CGFloat = 2
+    private let databaseModel: DatabaseModel = DatabaseModel()
+    private var favouriteProduct: [Product] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .background
         
         collectionView.backgroundColor = .background
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(FavouriteViewControllerCell.self, forCellWithReuseIdentifier: "FavouriteViewControllerCell")
+        collectionView.register(FavouriteViewControllerCell.self,
+                                forCellWithReuseIdentifier: "FavouriteViewControllerCell")
         
+        getDetails()
+        emptyFavouriteLabel.isHidden = true
         view.addSubview(collectionView)
-        view.addSubview(itemOfFav)
+        view.addSubview(emptyFavouriteLabel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        let filterButtonImage = UIImage(systemName: "slider.horizontal.3")
-        let rightButtonItem = UIBarButtonItem(image: filterButtonImage, style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem = rightButtonItem
-        navigationController?.navigationBar.tintColor = .primary
+//        let filterButtonImage = UIImage(systemName: "slider.horizontal.3")
+//        let rightButtonItem = UIBarButtonItem(image: filterButtonImage, style: .plain, target: self, action: nil)
+//        navigationItem.rightBarButtonItem = rightButtonItem
+//        navigationController?.navigationBar.tintColor = .primary
         navigationItem.title = "Favourite"
 //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Comfortaa-Bold", size: 20)]
         
@@ -54,60 +62,114 @@ final class FavouriteViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        itemOfFav.pin
-            .center()
-            .sizeToFit()
-        
         collectionView.pin.all()
+        
+        emptyFavouriteLabel.pin
+            .top(view.pin.safeArea.top + 100)
+            .hCenter()
+            .sizeToFit()
     }
     
-    @objc
-    func didTapLikeButton() {
-        let beerCardViewController = UINavigationController(rootViewController: BeerCardViewController())
-        beerCardViewController.modalPresentationStyle = .fullScreen
-        self.present(beerCardViewController, animated: true, completion: nil)
+    func getDetails() {
+        var fav: [String] = []
+        databaseModel.getFavouriteBeerInDatabase {[weak self] result in
+            switch result {
+            case .success(let res):
+                guard !res.isEmpty else {
+                    self?.emptyFavouriteLabel.isHidden = false
+                    self?.favouriteProduct = []
+                    self?.collectionView.reloadData()
+                    return
+                }
+                self?.emptyFavouriteLabel.isHidden = true
+                fav = res
+                self?.databaseModel.getDetailsOfFavouriteBeer(favouriteArray: fav) {[weak self] result in
+                    switch result {
+                    case .success(let product):
+                        self?.favouriteProduct = product
+                        self?.collectionView.reloadData()
+
+                    case .failure(_):
+                        print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
+                    }
+                }
+                print("[DEBUG]: Good!")
+
+            case .failure(_):
+                print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
+            }
+        }
+    }
+}
+
+extension FavouriteViewController: FavouriteViewControllerCellDelegate {
+    func didTapLikeBeer(isLiked: Bool, beerId: String) {
+        
+        if isLiked {
+            databaseModel.removeFavouriteBeerFromDatabase(beerId: beerId) {[weak self] result in
+                switch result {
+                case .success(_):
+                    self?.getDetails()
+                case .failure(_):
+                    return
+                }
+            }
+        } else {
+            databaseModel.addFavouriteBeerInDatabase(beerId: beerId) {[weak self] result in
+                switch result {
+                case .success(_):
+                    self?.getDetails()
+                case .failure(_):
+                    return
+                }
+            }
+        }
     }
 }
 
 extension FavouriteViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return favouriteProduct.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteViewControllerCell", for: indexPath) as? FavouriteViewControllerCell else {
             return .init();
         }
+        let favouriteCell = favouriteProduct[indexPath.item]
+        cell.configure(with: favouriteCell)
+        cell.delegate = self
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 173, height: 201)
+        let availableWidth = collectionView.frame.width - cellsOffset * (numberOfItemsPerRowProducts + 1)
+        let cellWidth = availableWidth / numberOfItemsPerRowProducts
+        
+        return CGSize(width: cellWidth, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return cellsOffset
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return cellsOffset
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
+        return .init(top: 0, left: cellsOffset, bottom: 0, right: cellsOffset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let beerCardViewController = BeerCardViewController()
+        let navigationController = UINavigationController(rootViewController: beerCardViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        beerCardViewController.product = favouriteProduct[indexPath.item]
+    
+        present(navigationController, animated: true, completion: nil)
     }
 }
 
-
-final class FavouriteViewControllerCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .primary
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
