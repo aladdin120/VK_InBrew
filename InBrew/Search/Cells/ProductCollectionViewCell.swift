@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 
 final class ProductCollectionViewCell: UICollectionViewCell {
@@ -71,10 +72,29 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         nameLabel.text = product.name
         categoryLabel.text = product.sort + ", " + product.categories
         priceLabel.text = product.price
-        model.getBeerImage(beerId: product.id) { [weak self] result in
+//        model.getBeerImage(beerId: product.id) { [weak self] result in
+//            switch result {
+//            case .success(let img):
+//                self?.imageView.image = img
+//            case .failure(let error):
+//                print("[DEBUG]: \(error)")
+//                self?.imageView.image = UIImage(named: "defaultIcon")
+//            }
+//        }
+        
+        model.getBeerImageUrl(beerId: product.id) { [weak self] result in
             switch result {
-            case .success(let img):
-                self?.imageView.image = img
+            case .success(let url):
+                self?.imageView.kf.indicatorType = .activity
+                self?.imageView.kf.setImage(with: url,
+                                            options: [
+                                                .transition(.fade(1)),
+                                                .cacheOriginalImage
+                                            ])
+                let cache = ImageCache.default
+                let cached = cache.imageCachedType(forKey: url.absoluteString)
+                print("[DEBUG]: \(cached)")
+                print("[DEBUG]: \(product.name): \(url.absoluteString)")
             case .failure(let error):
                 print("[DEBUG]: \(error)")
                 self?.imageView.image = UIImage(named: "defaultIcon")
