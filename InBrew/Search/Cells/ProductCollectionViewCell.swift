@@ -2,7 +2,7 @@
 //  ProductCollectionViewCell.swift
 //  InBrew
 //
-//  Created by Ольга Лемешева on 07.11.2021.
+//  Created by fedo on 07.11.2021.
 //
 
 import Foundation
