@@ -126,10 +126,19 @@ final class BeerCardViewController: UIViewController {
             likeOfBeerButton.restorationIdentifier = "heart"
         }
         
-        model.getBeerImage(beerId: product.id) { [weak self] result in
+        if let imUrl = model.getCacheUrl(beerId: product.id) {
+            beerImageView.kf.setImage(with: imUrl)
+        }
+        
+        model.getBeerImageUrl(beerId: product.id) { [weak self] result in
             switch result {
-            case .success(let img):
-                self?.beerImageView.image = img
+            case .success(let url):
+                self?.beerImageView.kf.indicatorType = .activity
+                self?.beerImageView.kf.setImage(with: url,
+                                            options: [
+                                                .transition(.fade(1)),
+                                                .cacheOriginalImage
+                                            ])
             case .failure(let error):
                 print("[DEBUG]: \(error)")
                 self?.beerImageView.image = UIImage(named: "defaultIcon")
@@ -271,7 +280,7 @@ final class BeerCardViewController: UIViewController {
             databaseModel.addFavouriteBeerInDatabase(beerId: productId) {  document in
                 switch document {
                 case .success(_):
-                    print("[DEBUG]: Yes!")
+                    print("[DEBUG]: addFavouriteBeerInDatabase")
                     
                 case .failure(_):
                     print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
@@ -285,7 +294,7 @@ final class BeerCardViewController: UIViewController {
             databaseModel.removeFavouriteBeerFromDatabase(beerId: productId) { document in
                 switch document {
                 case .success(_):
-                    print("[DEBUG]: Yes!")
+                    print("[DEBUG]: removeFavouriteBeerFromDatabase")
                  
                 case .failure(_):
                     print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
