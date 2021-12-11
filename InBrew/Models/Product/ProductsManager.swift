@@ -28,7 +28,6 @@ class ProductsManager: ProductsManagerProtocol {
                 completion(.failure(FirebaseError.notFindDocument))
                 return
             }
-                        
             guard let documents = querySnapshot?.documents else {
                 completion(.failure(FirebaseError.emptyDocumentData))
                 return
@@ -42,7 +41,8 @@ class ProductsManager: ProductsManagerProtocol {
                     let products = documents.compactMap { self?.productConverter.convertToProduct(from: $0, isFavourite: favouriteArray.contains($0.documentID)) }
                     completion(.success(products))
                     
-                case .failure(_):
+                case .failure(let error):
+                    completion(.failure(error))
                     return
                 }
             }

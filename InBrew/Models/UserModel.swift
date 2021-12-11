@@ -18,7 +18,5 @@ struct UserModel {
         self.email = email
         self.name = name
         self.avatar = avatar
-        
     }
-    
 }
