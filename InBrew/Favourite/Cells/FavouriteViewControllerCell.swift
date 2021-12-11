@@ -7,6 +7,7 @@
 
 import UIKit
 import PinLayout
+import Kingfisher
 
 protocol FavouriteViewControllerCellDelegate: AnyObject {
     func didTapLikeBeer(isLiked: Bool, beerId: String)
@@ -47,7 +48,7 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
         beerCostLabel.font = UIFont(name: "Comfortaa-Bold", size: 18)
         beerCostLabel.textColor = .text
         
-        likeBeerButton.tintColor = .systemYellow
+        likeBeerButton.tintColor = .primary
         likeBeerButton.imageView?.layer.transform = CATransform3DMakeScale(1.3, 1.3, 0)
 
         likeBeerButton.addTarget(self, action: #selector(didTapLikeBeerInCell), for: .touchUpInside)
@@ -84,10 +85,19 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
             likeBeerButton.restorationIdentifier = "heart"
         }
         
-        model.getBeerImage(beerId: beerId) {[weak self] result in
+        if let imUrl = model.getCacheUrl(beerId: favouriteCell.id) {
+            beerImage.kf.setImage(with: imUrl)
+        }
+        
+        model.getBeerImageUrl(beerId: favouriteCell.id) { [weak self] result in
             switch result {
-            case .success(let img):
-                self?.beerImage.image = img
+            case .success(let url):
+                self?.beerImage.kf.indicatorType = .activity
+                self?.beerImage.kf.setImage(with: url,
+                                            options: [
+                                                .transition(.fade(1)),
+                                                .cacheOriginalImage
+                                            ])
             case .failure(let error):
                 print("[DEBUG]: \(error)")
                 self?.beerImage.image = UIImage(named: "defaultIcon")
@@ -142,5 +152,4 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
             delegate?.didTapLikeBeer(isLiked: false, beerId: beerId)
         }
     }
-    
 }
