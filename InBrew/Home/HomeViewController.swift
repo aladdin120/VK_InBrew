@@ -22,21 +22,51 @@ final class HomeViewController: UIViewController {
     private let numberOfItemsPerRowBanner: CGFloat = 1
     private let numberOfBanners = 1
     
+    private let model: CategoryManagerProtocol = CategoryManager.shared
+    private let productModel: ProductsManagerProtocol = ProductsManager.shared
+    
     private var categories: [Category] = []
+    private var beerId: String = ""
+    private var product: Product? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        categories = CategoryManager.shared.loadCategories()
+        loadCategories()
         
         setupNavBar()
         setupCollectionView()
     }
     
+    func loadCategories() {
+        model.getAllCategories { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.categories = data
+                self?.MyCollectionView?.reloadData()
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+            }
+        }
+        
+        
+        model.getBeerOfTheDay { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.beerId = data
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+            }
+        }
+    }
+    
+
+    
     func setupNavBar() {
         view.backgroundColor = .white
         title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
     }
     
     func setupCollectionView() {
@@ -61,9 +91,9 @@ final class HomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         MyCollectionView?.pin
-            .top(view.safeAreaInsets.bottom)
+            .top(view.pin.safeArea.bottom)
             .bottom(view.pin.safeArea)
-            .marginTop(10)
+            .marginTop(20)
             .horizontally(5)
     }
 }
@@ -92,6 +122,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.configure(with: category)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            let beerCardViewController = BeerCardViewController()
+            let navigationController = UINavigationController(rootViewController: beerCardViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            beerCardViewController.beerId = self.beerId
+            self.present(navigationController, animated: true, completion: nil)
+        } else {
+            let categoryViewController = CategoryViewController()
+            categoryViewController.nameCurrentCategory = categories[indexPath.item - numberOfBanners].name
+            self.navigationController?.pushViewController(categoryViewController, animated: true)
+        }
     }
 }
 

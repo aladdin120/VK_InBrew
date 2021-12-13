@@ -70,6 +70,7 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
         super.prepareForReuse()
         
         beerImage.image = nil
+        beerImage.kf.cancelDownloadTask()
     }
     
     func configure(with favouriteCell: Product) {
@@ -85,7 +86,7 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
             likeBeerButton.restorationIdentifier = "heart"
         }
         
-        if let imUrl = model.getCacheUrl(beerId: favouriteCell.id) {
+        if let imUrl = model.getCacheUrl(id: favouriteCell.id) {
             beerImage.kf.setImage(with: imUrl)
         }
         
