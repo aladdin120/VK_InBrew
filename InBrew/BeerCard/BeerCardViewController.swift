@@ -26,7 +26,17 @@ final class BeerCardViewController: UIViewController {
     private let databaseModel: DatabaseModel = DatabaseModel()
     private let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
     
+    private let productModel: ProductsManagerProtocol = ProductsManager.shared
     private let model: ImageLoaderProtocol = ImageLoader.shared
+    var beerId: String? {
+        didSet {
+            guard let beerId = beerId else {
+                return
+            }
+            
+            loadProduct(beerId)
+        }
+    }
     var product: Product? {
         didSet {
             guard let product = product else {
@@ -113,6 +123,18 @@ final class BeerCardViewController: UIViewController {
         view.addSubview(scrollView)
     }
     
+    func loadProduct(_ beer: String) {
+        print(beer)
+        productModel.getBeerById(with: beer) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.product = data
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+            }
+        }
+    }
+    
     func configure(with product: Product) {
         beerTitleLabel.text = product.name
         beerContryLabel.text = product.categories + ", " + product.sort
@@ -126,10 +148,19 @@ final class BeerCardViewController: UIViewController {
             likeOfBeerButton.restorationIdentifier = "heart"
         }
         
-        model.getBeerImage(beerId: product.id) { [weak self] result in
+        if let imUrl = model.getCacheUrl(id: product.id) {
+            beerImageView.kf.setImage(with: imUrl)
+        }
+        
+        model.getBeerImageUrl(beerId: product.id) { [weak self] result in
             switch result {
-            case .success(let img):
-                self?.beerImageView.image = img
+            case .success(let url):
+                self?.beerImageView.kf.indicatorType = .activity
+                self?.beerImageView.kf.setImage(with: url,
+                                            options: [
+                                                .transition(.fade(1)),
+                                                .cacheOriginalImage
+                                            ])
             case .failure(let error):
                 print("[DEBUG]: \(error)")
                 self?.beerImageView.image = UIImage(named: "defaultIcon")
@@ -286,7 +317,7 @@ final class BeerCardViewController: UIViewController {
             databaseModel.addFavouriteBeerInDatabase(beerId: productId) {  document in
                 switch document {
                 case .success(_):
-                    print("[DEBUG]: Yes!")
+                    print("[DEBUG]: addFavouriteBeerInDatabase")
                     
                 case .failure(_):
                     print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
@@ -300,7 +331,7 @@ final class BeerCardViewController: UIViewController {
             databaseModel.removeFavouriteBeerFromDatabase(beerId: productId) { document in
                 switch document {
                 case .success(_):
-                    print("[DEBUG]: Yes!")
+                    print("[DEBUG]: removeFavouriteBeerFromDatabase")
                  
                 case .failure(_):
                     print("[DEBUG]: \(FirebaseError.emptyDocumentData)")

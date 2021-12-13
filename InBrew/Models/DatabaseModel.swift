@@ -74,14 +74,17 @@ final class DatabaseModel {
     
     func getFavouriteBeerInDatabase(completion: @escaping (Result<[String], Error>) -> Void) {
         guard let UID = Auth.auth().currentUser?.uid else {
-            print("[DEBUG]: \(FirebaseError.notFindUser)")
+            completion(.failure(FirebaseError.notFindUser))
             return
         }
-        
+
         database.collection("users").document(UID).addSnapshotListener { querySnapshot, error in
-            guard error == nil,
-                  let querySnapshot = querySnapshot,
-                  querySnapshot.exists else {
+            guard error == nil, let querySnapshot = querySnapshot else {
+                completion(.failure(FirebaseError.notFindDocument))
+                return
+            }
+            
+            guard let _ = querySnapshot.data() else {
                 completion(.failure(FirebaseError.emptyDocumentData))
                 return
             }

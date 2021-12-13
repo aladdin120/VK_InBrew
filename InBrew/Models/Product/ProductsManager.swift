@@ -12,6 +12,8 @@ import UIKit
 
 protocol ProductsManagerProtocol {
     func getAllBeer(completion: @escaping (Result<[Product], Error>) -> Void)
+    func getAllBeerWithFilter(with country: String, completion: @escaping (Result<[Product], Error>) -> Void)
+    func getBeerById(with id: String, completion: @escaping (Result<Product?, Error>) -> Void)
 }
 
 class ProductsManager: ProductsManagerProtocol {
@@ -28,7 +30,6 @@ class ProductsManager: ProductsManagerProtocol {
                 completion(.failure(FirebaseError.notFindDocument))
                 return
             }
-                        
             guard let documents = querySnapshot?.documents else {
                 completion(.failure(FirebaseError.emptyDocumentData))
                 return
@@ -42,7 +43,63 @@ class ProductsManager: ProductsManagerProtocol {
                     let products = documents.compactMap { self?.productConverter.convertToProduct(from: $0, isFavourite: favouriteArray.contains($0.documentID)) }
                     completion(.success(products))
                     
-                case .failure(_):
+                case .failure(let error):
+                    completion(.failure(error))
+                    return
+                }
+            }
+        }
+    }
+    
+    func getAllBeerWithFilter(with country: String, completion: @escaping (Result<[Product], Error>) -> Void) {
+        database.collection("beer").whereField("country", isEqualTo: country).getDocuments { [weak self] (querySnapshot, err) in
+            if err != nil {
+                completion(.failure(FirebaseError.notFindDocument))
+                return
+            }
+            guard let documents = querySnapshot?.documents else {
+                completion(.failure(FirebaseError.emptyDocumentData))
+                return
+            }
+            
+            var favouriteArray: [String] = []
+            self?.databaseModel.getFavouriteBeerInDatabase { result in
+                switch result {
+                case .success(let favourite):
+                    favouriteArray = favourite
+                    let products = documents.compactMap { self?.productConverter.convertToProduct(from: $0, isFavourite: favouriteArray.contains($0.documentID)) }
+                    completion(.success(products))
+                    
+                case .failure(let error):
+                    completion(.failure(error))
+                    return
+                }
+            }
+        }
+    }
+    
+    func getBeerById(with id: String, completion: @escaping (Result<Product?, Error>) -> Void) {
+        database.collection("beer").document(id).getDocument { [weak self] (querySnapshot, err) in
+            guard err == nil, let querySnapshot = querySnapshot else {
+                completion(.failure(FirebaseError.notFindDocument))
+                return
+            }
+            
+            guard let _ = querySnapshot.data() else {
+                completion(.failure(FirebaseError.emptyDocumentData))
+                return
+            }
+
+            var favouriteArray: [String] = []
+            self?.databaseModel.getFavouriteBeerInDatabase { result in
+                switch result {
+                case .success(let favourite):
+                    favouriteArray = favourite
+                    let product = self?.productConverter.convertToProduct(from: querySnapshot, isFavourite: favouriteArray.contains(querySnapshot.documentID))
+                    completion(.success(product))
+                    
+                case .failure(let error):
+                    completion(.failure(error))
                     return
                 }
             }

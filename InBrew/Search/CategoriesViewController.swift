@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol CategoriesViewControllerInput: AnyObject {
-    func didReceive(_ products: [Product])
-}
-
 final class CategoriesViewController: UIViewController {
 
     private var beerCollection: UICollectionView?
@@ -103,7 +99,7 @@ final class CategoriesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         beerCollection?.pin
-            .top(view.safeAreaInsets.bottom)
+            .top(view.pin.safeArea.bottom)
             .bottom(view.pin.safeArea)
             .marginTop(10)
             .horizontally(5)
@@ -184,7 +180,6 @@ extension CategoriesViewController: UICollectionViewDelegate, UICollectionViewDa
         let navigationController = UINavigationController(rootViewController: beerCardViewController)
         navigationController.modalPresentationStyle = .fullScreen
         beerCardViewController.product = product
-        
         present(navigationController, animated: true, completion: nil)
     }
 }

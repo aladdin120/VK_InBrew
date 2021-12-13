@@ -2,11 +2,12 @@
 //  ProductCollectionViewCell.swift
 //  InBrew
 //
-//  Created by Ольга Лемешева on 07.11.2021.
+//  Created by fedo on 07.11.2021.
 //
 
 import Foundation
 import UIKit
+import Kingfisher
 
 
 final class ProductCollectionViewCell: UICollectionViewCell {
@@ -20,6 +21,8 @@ final class ProductCollectionViewCell: UICollectionViewCell {
     private let favButton = UIButton()
     
     private let model: ImageLoaderProtocol = ImageLoader.shared
+    private let databaseModel: DatabaseModel = DatabaseModel()
+    private var product: Product?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +35,10 @@ final class ProductCollectionViewCell: UICollectionViewCell {
     
     func setupButton() {
         favButton.setImage(UIImage(named: "favouriteIcon")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        favButton.tintColor = .systemYellow
+        favButton.tintColor = .primary
+        favButton.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 0)
+        favButton.imageView?.contentMode = .scaleAspectFit
+        favButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         contentView.addSubview(favButton)
     }
     
@@ -63,18 +69,83 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(priceLabel)
     }
     
+    @objc
+    func didTapLikeButton() {
+        guard let productId = product?.id else {
+            print("[DEBUG]: Not find product id!")
+            return
+        }
+        
+        if favButton.restorationIdentifier == "heart" {
+            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favButton.restorationIdentifier = "heart.fill"
+            
+            databaseModel.addFavouriteBeerInDatabase(beerId: productId) {  document in
+                switch document {
+                case .success(_):
+                    print("[DEBUG]: addFavouriteBeerInDatabase")
+                    
+                case .failure(_):
+                    print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
+                }
+            }
+            
+        } else if favButton.restorationIdentifier == "heart.fill" {
+            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            favButton.restorationIdentifier = "heart"
+            
+            databaseModel.removeFavouriteBeerFromDatabase(beerId: productId) { document in
+                switch document {
+                case .success(_):
+                    print("[DEBUG]: removeFavouriteBeerFromDatabase")
+                 
+                case .failure(_):
+                    print("[DEBUG]: \(FirebaseError.emptyDocumentData)")
+                }
+            }
+        }
+        
+        ProductsManager.shared.getAllBeer { result in
+            switch result {
+            case .success(_):
+                return
+                
+            case .failure(_):
+                return
+            }
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func configure(with product: Product) {
+        self.product = product
         nameLabel.text = product.name
         categoryLabel.text = product.sort + ", " + product.categories
         priceLabel.text = product.price
-        model.getBeerImage(beerId: product.id) { [weak self] result in
+        if let imUrl = model.getCacheUrl(id: product.id) {
+            imageView.kf.setImage(with: imUrl)
+        }
+        
+        if product.isFavourite {
+            favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favButton.restorationIdentifier = "heart.fill"
+        } else {
+            favButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            favButton.restorationIdentifier = "heart"
+        }
+        
+        model.getBeerImageUrl(beerId: product.id) { [weak self] result in
             switch result {
-            case .success(let img):
-                self?.imageView.image = img
+            case .success(let url):
+                self?.imageView.kf.indicatorType = .activity
+                self?.imageView.kf.setImage(with: url,
+                                            options: [
+                                                .transition(.fade(1)),
+                                                .cacheOriginalImage
+                                            ])
             case .failure(let error):
                 print("[DEBUG]: \(error)")
                 self?.imageView.image = UIImage(named: "defaultIcon")
@@ -116,5 +187,6 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         imageView.image = nil
+        imageView.kf.cancelDownloadTask()
     }
 }
