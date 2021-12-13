@@ -26,7 +26,17 @@ final class BeerCardViewController: UIViewController {
     private let databaseModel: DatabaseModel = DatabaseModel()
     let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
     
+    private let productModel: ProductsManagerProtocol = ProductsManager.shared
     private let model: ImageLoaderProtocol = ImageLoader.shared
+    var beerId: String? {
+        didSet {
+            guard let beerId = beerId else {
+                return
+            }
+            
+            loadProduct(beerId)
+        }
+    }
     var product: Product? {
         didSet {
             guard let product = product else {
@@ -113,6 +123,18 @@ final class BeerCardViewController: UIViewController {
         view.addSubview(scrollView)
     }
     
+    func loadProduct(_ beer: String) {
+        print(beer)
+        productModel.getBeerById(with: beer) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.product = data
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+            }
+        }
+    }
+    
     func configure(with product: Product) {
         beerTitleLabel.text = product.name
         beerContryLabel.text = product.categories + ", " + product.sort
@@ -126,7 +148,7 @@ final class BeerCardViewController: UIViewController {
             likeOfBeerButton.restorationIdentifier = "heart"
         }
         
-        if let imUrl = model.getCacheUrl(beerId: product.id) {
+        if let imUrl = model.getCacheUrl(id: product.id) {
             beerImageView.kf.setImage(with: imUrl)
         }
         

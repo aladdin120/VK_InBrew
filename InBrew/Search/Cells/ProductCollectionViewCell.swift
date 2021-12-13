@@ -125,7 +125,7 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         nameLabel.text = product.name
         categoryLabel.text = product.sort + ", " + product.categories
         priceLabel.text = product.price
-        if let imUrl = model.getCacheUrl(beerId: product.id) {
+        if let imUrl = model.getCacheUrl(id: product.id) {
             imageView.kf.setImage(with: imUrl)
         }
         

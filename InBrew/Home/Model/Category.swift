@@ -8,6 +8,7 @@
 import Foundation
 
 struct Category {
+    //let id: String
     let name: String
     let iconUrl: URL?
 }
