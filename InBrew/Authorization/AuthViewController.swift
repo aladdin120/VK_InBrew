@@ -22,11 +22,14 @@ final class AuthViewController: UIViewController {
     private let notRegisteredLabel = UILabel()
     private let signUpButton  = UIButton()
     private let authModel: AuthFirebaseModel = AuthFirebaseModel()
+    private let scrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background
+        
+        scrollView.alwaysBounceVertical = true
         
         logoImageView.contentMode = .scaleAspectFit
         logoImageView.clipsToBounds = true
@@ -102,12 +105,15 @@ final class AuthViewController: UIViewController {
          logInButton,
          notRegisteredLabel,
          signUpButton].forEach() {
-            view.addSubview($0)
+            scrollView.addSubview($0)
          }
+        view.addSubview(scrollView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        scrollView.pin.all()
         
         logoImageView.pin
             .top(view.pin.safeArea + 11)
@@ -178,6 +184,8 @@ final class AuthViewController: UIViewController {
             .marginTop(5)
             .hCenter()
             .sizeToFit()
+        
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: signUpButton.frame.maxY + 25)
     }
     
     @objc

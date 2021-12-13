@@ -25,10 +25,13 @@ final class RegistrationViewController: UIViewController {
     private let haveAccountLable = UILabel()
     private let loginButton = UIButton()
     private let registrationModel: RegistrationFirebaseModel = RegistrationFirebaseModel()
+    private let scrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
+        
+        scrollView.alwaysBounceVertical = true
         
         signUpHeader.text = "SingUp"
         signUpHeader.font = UIFont(name: "Comfortaa-Bold", size: 26)
@@ -89,8 +92,9 @@ final class RegistrationViewController: UIViewController {
          signUpButton,
          haveAccountLable,
          loginButton].forEach() {
-            view.addSubview($0)
+            scrollView.addSubview($0)
         }
+        view.addSubview(scrollView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,11 +111,15 @@ final class RegistrationViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         var marginTop: CGFloat = view.pin.safeArea.top + 11
         
         if let navHeight = navigationController?.navigationBar.frame.height {
             marginTop -= navHeight
         }
+        
+        scrollView.pin.all()
         
         logoImageView.pin
             .top(marginTop)
@@ -187,6 +195,8 @@ final class RegistrationViewController: UIViewController {
             .marginTop(41)
             .height(67)
             .horizontally(5)
+        
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: signUpButton.frame.maxY + 25)
     }
     
     @objc

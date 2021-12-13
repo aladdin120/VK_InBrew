@@ -24,7 +24,7 @@ final class BeerCardViewController: UIViewController {
     private let goToReviewScreenImage = UIImageView(image: UIImage(systemName: "chevron.right"))
     private let addReviewButton = UIButton()
     private let databaseModel: DatabaseModel = DatabaseModel()
-    let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
+    private let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
     
     private let productModel: ProductsManagerProtocol = ProductsManager.shared
     private let model: ImageLoaderProtocol = ImageLoader.shared
@@ -93,7 +93,7 @@ final class BeerCardViewController: UIViewController {
         showBeerReviewButton.setTitle("Review", for: .normal)
         showBeerReviewButton.setTitleColor(.text, for: .normal)
         showBeerReviewButton.titleLabel?.font = UIFont(name: "Comfortaa-Bold", size: 16)
-        showBeerReviewButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: view.frame.width)
+        showBeerReviewButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 10, right: view.frame.width)
         showBeerReviewButton.addTarget(self, action: #selector(didTapShowReviewButton), for: .touchUpInside)
         
         goToReviewScreenImage.tintColor = .text
@@ -114,9 +114,9 @@ final class BeerCardViewController: UIViewController {
          beerDetailTitleLable,
          beerDetailDescriptionLabel,
          descriptionSeparator,
-         showBeerReviewButton,
          starsModule,
          goToReviewScreenImage,
+         showBeerReviewButton,
          addReviewButton].forEach() {
             scrollView.addSubview($0)
         }
@@ -182,8 +182,7 @@ final class BeerCardViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.pin
-            .all()
+        scrollView.pin.all()
         
         beerImageView.pin
             .top(-(navigationController?.navigationBar.frame.height  ?? 0))// - view.pin.safeArea.top)
@@ -269,7 +268,7 @@ final class BeerCardViewController: UIViewController {
             .horizontally(5)
             .height(67)
         
-        scrollView.contentSize = CGSize(width: view.bounds.width, height: beerDetailDescriptionLabel.frame.maxY)
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: addReviewButton.frame.maxY + 25)
         
     }
     
@@ -280,12 +279,28 @@ final class BeerCardViewController: UIViewController {
     
     @objc
     func didTapShowReviewButton() {
-        print("[DEBUG:] Show Review!")
+        guard let product = product else {
+            return
+        }
+        
+        let reviewsViewController = ReviewsViewController()
+        reviewsViewController.product = product
+        let navigationController = UINavigationController(rootViewController: reviewsViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     @objc
     func didTapWriteReviewButton() {
-        print("[DEBUG:] Write a review!")
+        guard let product = product else {
+            return
+        }
+        
+        let addReviewViewController = AddReviewViewController()
+        addReviewViewController.product = product
+        let navigationController = UINavigationController(rootViewController: addReviewViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     @objc

@@ -17,4 +17,11 @@ struct Product {
     let sort: String
     let isFavourite: Bool
     var imageUrl: URL?
+    
+    // review fields
+    var review: [String: Any] = [:]
+//    var uid: String
+//    var text: String
+//    var rating: Int
+//    var userImage: URL?
 }

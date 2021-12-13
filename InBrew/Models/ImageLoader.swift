@@ -13,6 +13,7 @@ import UIKit
 protocol ImageLoaderProtocol {
     func getBeerImage(beerId: String, completion: @escaping (Result<UIImage, Error>) -> Void)
     func getBeerImageUrl(beerId: String, completion: @escaping (Result<URL, Error>) -> Void)
+    func getReviewImage(reviewId: String, completion: @escaping (Result<UIImage, Error>) -> Void)
     func getCountryImageUrl(name: String, completion: @escaping (Result<URL, Error>) -> Void)
     func getCacheUrl(id: String) -> URL?
 }
@@ -70,5 +71,19 @@ class ImageLoader: ImageLoaderProtocol {
     
     func getCacheUrl(id: String) -> URL? {
         return dictOfUrls[id]
+    }
+    
+    func getReviewImage(reviewId: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        let pathRef = reference.child("review")
+        let fileRef = pathRef.child(reviewId + ".jpeg")
+
+        fileRef.getData(maxSize: 15 * 1024 * 1024) { (data, err) in
+            if err != nil {
+                completion(.failure(FirebaseError.notFindData))
+                return
+            } else if let data = data, let img = UIImage(data: data) {
+                completion(.success(img))
+            }
+        }
     }
 }

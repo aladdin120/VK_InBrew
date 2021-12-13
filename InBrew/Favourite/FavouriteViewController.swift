@@ -47,14 +47,7 @@ final class FavouriteViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-//        let filterButtonImage = UIImage(systemName: "slider.horizontal.3")
-//        let rightButtonItem = UIBarButtonItem(image: filterButtonImage, style: .plain, target: self, action: nil)
-//        navigationItem.rightBarButtonItem = rightButtonItem
-//        navigationController?.navigationBar.tintColor = .primary
         navigationItem.title = "Favourite"
-//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Comfortaa-Bold", size: 20)]
-        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.shadowImage = UIImage()
