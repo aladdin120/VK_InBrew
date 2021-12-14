@@ -81,7 +81,8 @@ final class AddReviewViewController: UIViewController {
         beerDescriptionTextView.layer.borderWidth = 0.8
         beerDescriptionTextView.layer.cornerRadius = 10
         beerDescriptionTextView.layer.borderColor = UIColor.border.cgColor
-        
+        beerDescriptionTextView.textColor = UIColor.lightGray
+        beerDescriptionTextView.delegate = self
         
         ratingLabel.text = "Rating"
         
@@ -333,6 +334,22 @@ extension AddReviewViewController: UIImagePickerControllerDelegate, UINavigation
             userImage.isHidden = false
             addImageButton.isHidden = true
             deleteImageButton.isHidden = false
+        }
+    }
+}
+
+extension AddReviewViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Write a few words about this beer"
+            textView.textColor = UIColor.lightGray
         }
     }
 }
