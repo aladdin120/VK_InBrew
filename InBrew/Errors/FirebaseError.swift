@@ -13,5 +13,6 @@ enum FirebaseError: Error {
     case emptyDocumentData
     case notFindDocument
     case notFindData
+    case canNotAddDocument
 }
 

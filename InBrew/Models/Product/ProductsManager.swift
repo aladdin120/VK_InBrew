@@ -6,7 +6,6 @@
 //
 
 import Firebase
-//import FirebaseDatabase
 import UIKit
 
 
@@ -14,6 +13,7 @@ protocol ProductsManagerProtocol {
     func getAllBeer(completion: @escaping (Result<[Product], Error>) -> Void)
     func getAllBeerWithFilter(with country: String, completion: @escaping (Result<[Product], Error>) -> Void)
     func getBeerById(with id: String, completion: @escaping (Result<Product?, Error>) -> Void)
+    func addBeer(with data: [String: Any], with image: Data?, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 class ProductsManager: ProductsManagerProtocol {
@@ -106,24 +106,27 @@ class ProductsManager: ProductsManagerProtocol {
         }
     }
     
-//    func isBeerFavourite(completion: @escaping (Result<[String], Error>) -> Void) {
-//        guard let UID = Auth.auth().currentUser?.uid else {
-//            print("[DEBUG]: \(FirebaseError.notFindUser)")
-//            return
-//        }
-//
-//        database.collection("users").document(UID).addSnapshotListener {querySnapshot, error in
-//            guard let querySnapshot = querySnapshot,
-//                  querySnapshot.exists else {
-//                completion(.failure(FirebaseError.emptyDocumentData))
-//                return
-//            }
-//
-//            let favouriteArray = querySnapshot.get("favourite") as? [String] ?? []
-//
-//            completion(.success(favouriteArray))
-//        }
-//    }
+    func addBeer(with data: [String: Any], with image: Data?, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let beerId = database.collection("beer").addDocument(data: data).documentID
+        
+        let reference = Storage.storage().reference()
+        
+        let storageRef = reference.child("beer/" + beerId + ".jpeg")
+        if (image != nil) {
+            guard let image = image else {
+                return
+            }
+            
+            storageRef.putData(image, metadata: nil) { (metadata, error) in
+                guard let _ = metadata,
+                      error == nil else {
+                          completion(.failure(FirebaseError.canNotAddDocument))
+                          return
+                }
+            }
+        }
+        completion(.success(true))
+    }
 }
 
 private final class ProductConverter {
