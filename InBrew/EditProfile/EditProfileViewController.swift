@@ -136,7 +136,6 @@ final class EditProfileViewController: UIViewController{
     }
     
     @objc func saveTapButton() {
-        
         guard let newUsername = newUsernameTextField.text,
               let newPassword = newPasswordTextField.text,
               let confirmNewPassword = confirmNewPasswordTextField.text,
@@ -156,13 +155,13 @@ final class EditProfileViewController: UIViewController{
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
-        
+
         database.document(currentUser.uid).updateData(["name": newUsername])
         Auth.auth().currentUser?.updatePassword(to: newPassword)
         
-        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
-        profileViewController.modalPresentationStyle = .fullScreen
-        self.present(profileViewController, animated: true, completion: nil)
+//        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+//        profileViewController.modalPresentationStyle = .fullScreen
+//        self.present(profileViewController, animated: true, completion: nil)
         
         let mainTabBarController = MainTabBarController()
         mainTabBarController.modalPresentationStyle = .fullScreen
@@ -190,16 +189,53 @@ final class EditProfileViewController: UIViewController{
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-
+        print("WE GOT HEREEEEE")
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
+            print(type(of: imageView))
+        }
+        
+        let newImage = imageView.image?.jpegData(compressionQuality: 1.0)
+        updateProfileImage(with: newImage) { result in
+            switch result {
+            case .success(_):
+                print("Image saved")
+            case .failure(_):
+                print("It didn't work")
+            }
             
         }
-
+        
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateProfileImage(with image: Data?, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let reference = Storage.storage().reference()
+        
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        
+        let storageRef = reference.child("users/" + currentUser.uid + ".jpeg")
+        
+        if (image != nil) {
+            guard let image = image else {
+                return
+            }
+            storageRef.putData(image, metadata: nil) { (metadata, error) in
+                guard let _ = metadata,
+                      error == nil else {
+                          completion(.failure(FirebaseError.canNotAddDocument))
+                          return
+                }
+            }
+        }
+        
+        completion(.success(true))
     }
 }
