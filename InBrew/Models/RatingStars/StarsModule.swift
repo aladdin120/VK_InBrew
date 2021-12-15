@@ -24,6 +24,10 @@ final class StarsModule: UIStackView {
         }
     }
     
+//    func numberOfRatingStar(count: Int) {
+//        rating = count
+//    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

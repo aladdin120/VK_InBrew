@@ -1,5 +1,5 @@
 //
-//  ReviewsViewControllerCell.swift
+//  ReviewsCell.swift
 //  InBrew
 //
 //  Created by golub_dobra on 12.12.2021.
@@ -8,8 +8,9 @@
 import UIKit
 import PinLayout
 
-class ReviewsViewControllerCell: UITableViewCell {
+class ReviewsCell: UITableViewCell {
     private let userNameLabel = UILabel()
+    private let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
     private let userReviewImageView = UIImageView(image: UIImage())
     private let poductReviewImageView = UIImageView(image: UIImage())
     private let productReviewTextLabel = UILabel()
@@ -50,6 +51,7 @@ class ReviewsViewControllerCell: UITableViewCell {
         
         [userReviewImageView,
          userNameLabel,
+         starsModule,
          productReviewTextLabel,
          poductReviewImageView,
          separatorReview].forEach() {
@@ -59,9 +61,9 @@ class ReviewsViewControllerCell: UITableViewCell {
     
     func configure(with reviewsCell: ReviewModel) {
         review = reviewsCell
-        
-        print("[DEBUG1]: \(reviewsCell)")
+
         userNameLabel.text = reviewsCell.name
+        starsModule.rating = reviewsCell.rating
         productReviewTextLabel.text = reviewsCell.review
         model.getReviewImage(reviewId: reviewsCell.id) {[weak self] result in
             switch result {
@@ -91,8 +93,15 @@ class ReviewsViewControllerCell: UITableViewCell {
             .after(of: userReviewImageView)
             .top()
             .marginLeft(21)
-            .right(21)
+            .right(150)
             .sizeToFit(.width)
+        
+        starsModule.pin
+            .top()
+            .after(of: userNameLabel)
+            .marginRight(21)
+            .marginTop(5)
+            .sizeToFit()
         
         separatorReview.pin
             .bottom()

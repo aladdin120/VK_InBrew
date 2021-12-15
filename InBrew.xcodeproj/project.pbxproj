@@ -19,13 +19,13 @@
 		5C1D98D0274323E500BE7328 /* AuthFirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98CA274323E500BE7328 /* AuthFirebaseModel.swift */; };
 		5C1D98D1274323E500BE7328 /* BeerCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98CC274323E500BE7328 /* BeerCardViewController.swift */; };
 		5C1D98D32743249100BE7328 /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D98D22743249100BE7328 /* DatabaseModel.swift */; };
-		5C2EF97127665F5B000D35D2 /* ReviewsViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EF97027665F5B000D35D2 /* ReviewsViewControllerCell.swift */; };
+		5C2EF97127665F5B000D35D2 /* ReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EF97027665F5B000D35D2 /* ReviewsCell.swift */; };
 		5C2EF9742766986C000D35D2 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2EF9732766986C000D35D2 /* ReviewModel.swift */; };
 		5C30A61C27387D7900DF5F70 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30A61B27387D7900DF5F70 /* UIViewController+Extensions.swift */; };
 		5C31A1702762EC57006EAC42 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C31A16F2762EC56006EAC42 /* ReviewsViewController.swift */; };
 		5C3E7EA82732ECF200FD779C /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EA72732ECF200FD779C /* FirebaseError.swift */; };
 		5C3E7EAA2732F19C00FD779C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E7EA92732F19C00FD779C /* UserModel.swift */; };
-		5C6C2082274EA3D2009304C1 /* FavouriteViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2081274EA3D2009304C1 /* FavouriteViewControllerCell.swift */; };
+		5C6C2082274EA3D2009304C1 /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2081274EA3D2009304C1 /* FavouriteCell.swift */; };
 		5C7D88992724B8D1009D1C6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D88982724B8D1009D1C6E /* AppDelegate.swift */; };
 		5C7D889B2724B8D1009D1C6E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D889A2724B8D1009D1C6E /* SceneDelegate.swift */; };
 		5C7D88A02724B8D1009D1C6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7D889E2724B8D1009D1C6E /* Main.storyboard */; };
@@ -68,14 +68,14 @@
 		5C1D98CA274323E500BE7328 /* AuthFirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthFirebaseModel.swift; sourceTree = "<group>"; };
 		5C1D98CC274323E500BE7328 /* BeerCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerCardViewController.swift; sourceTree = "<group>"; };
 		5C1D98D22743249100BE7328 /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
-		5C2EF97027665F5B000D35D2 /* ReviewsViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewControllerCell.swift; sourceTree = "<group>"; };
+		5C2EF97027665F5B000D35D2 /* ReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCell.swift; sourceTree = "<group>"; };
 		5C2EF9732766986C000D35D2 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		5C30A61B27387D7900DF5F70 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5C31A16F2762EC56006EAC42 /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		5C3E7EA72732ECF200FD779C /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		5C3E7EA92732F19C00FD779C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5C63C31A2724C27400ABD33C /* InBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C6C2081274EA3D2009304C1 /* FavouriteViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewControllerCell.swift; sourceTree = "<group>"; };
+		5C6C2081274EA3D2009304C1 /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		5C7D88982724B8D1009D1C6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C7D889A2724B8D1009D1C6E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5C7D889F2724B8D1009D1C6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 		5C31A16E2762EC25006EAC42 /* Reviews */ = {
 			isa = PBXGroup;
 			children = (
-				5C31A16F2762EC56006EAC42 /* ReviewsViewController.swift */,
 				5C83AE2D2767F8D500C9B4D8 /* ReviewViewController.swift */,
+				5C31A16F2762EC56006EAC42 /* ReviewsViewController.swift */,
 				5C2EF9722766984B000D35D2 /* Models */,
 				5C31A1712762F08C006EAC42 /* Cells */,
 			);
@@ -226,7 +226,7 @@
 		5C31A1712762F08C006EAC42 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5C2EF97027665F5B000D35D2 /* ReviewsViewControllerCell.swift */,
+				5C2EF97027665F5B000D35D2 /* ReviewsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -251,10 +251,18 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		5C432F062769731900558751 /* AddBeer */ = {
+			isa = PBXGroup;
+			children = (
+				5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */,
+			);
+			path = AddBeer;
+			sourceTree = "<group>";
+		};
 		5C6C2080274EA3A2009304C1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5C6C2081274EA3D2009304C1 /* FavouriteViewControllerCell.swift */,
+				5C6C2081274EA3D2009304C1 /* FavouriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -273,14 +281,15 @@
 		5C7D88972724B8D1009D1C6E /* InBrew */ = {
 			isa = PBXGroup;
 			children = (
-				5C31A16E2762EC25006EAC42 /* Reviews */,
-				5C1C68BE27442A6500C71368 /* Favourite */,
 				5C1D98C7274323E500BE7328 /* Authorization */,
-				5CC3FD2D2755267600267917 /* AddReview */,
-				5C1D98CB274323E500BE7328 /* BeerCard */,
 				5C1D98C3274323E500BE7328 /* Registration */,
 				84195D652735573E00255088 /* Home */,
 				844ED15A273852DD007AC2D6 /* Search */,
+				5C432F062769731900558751 /* AddBeer */,
+				5C1C68BE27442A6500C71368 /* Favourite */,
+				5C1D98CB274323E500BE7328 /* BeerCard */,
+				5C31A16E2762EC25006EAC42 /* Reviews */,
+				5CC3FD2D2755267600267917 /* AddReview */,
 				5C30A61A27387D4000DF5F70 /* UIViewController+Extensions */,
 				5C3E7EA62732ECCF00FD779C /* Errors */,
 				5C3E7EA32732E88B00FD779C /* Models */,
@@ -309,7 +318,6 @@
 		5C7D88AD2724B98D009D1C6E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C7D88B52724BBDA009D1C6E /* AddBeerViewController.swift */,
 				5C7D88B92724BCE9009D1C6E /* ProfileViewController.swift */,
 			);
 			path = Controllers;
@@ -531,7 +539,7 @@
 				5C1D98CD274323E500BE7328 /* RegistrationFirebaseModel.swift in Sources */,
 				844ED16027388B96007AC2D6 /* Product.swift in Sources */,
 				844ED15D27385AC9007AC2D6 /* ProductCollectionViewCell.swift in Sources */,
-				5C6C2082274EA3D2009304C1 /* FavouriteViewControllerCell.swift in Sources */,
+				5C6C2082274EA3D2009304C1 /* FavouriteCell.swift in Sources */,
 				84DF841F27300379001D53DF /* Category.swift in Sources */,
 				5C7D88B42724BB3F009D1C6E /* CategoriesViewController.swift in Sources */,
 				5C1D98D32743249100BE7328 /* DatabaseModel.swift in Sources */,
@@ -539,7 +547,7 @@
 				847005CA274597D5005FF9DF /* ImageLoader.swift in Sources */,
 				5C2EF9742766986C000D35D2 /* ReviewModel.swift in Sources */,
 				849A30B027333CCA005F9666 /* BannerCollectionViewCell.swift in Sources */,
-				5C2EF97127665F5B000D35D2 /* ReviewsViewControllerCell.swift in Sources */,
+				5C2EF97127665F5B000D35D2 /* ReviewsCell.swift in Sources */,
 				5C31A1702762EC57006EAC42 /* ReviewsViewController.swift in Sources */,
 				5C7D88B62724BBDA009D1C6E /* AddBeerViewController.swift in Sources */,
 				84DF8423273024D1001D53DF /* CategoryManager.swift in Sources */,

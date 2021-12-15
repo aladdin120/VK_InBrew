@@ -37,8 +37,8 @@ final class FavouriteViewController: UIViewController {
         collectionView.backgroundColor = .background
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(FavouriteViewControllerCell.self,
-                                forCellWithReuseIdentifier: "FavouriteViewControllerCell")
+        collectionView.register(FavouriteCell.self,
+                                forCellWithReuseIdentifier: "FavouriteCell")
         
         getDetails()
         emptyFavouriteLabel.isHidden = true
@@ -95,7 +95,7 @@ final class FavouriteViewController: UIViewController {
     }
 }
 
-extension FavouriteViewController: FavouriteViewControllerCellDelegate {
+extension FavouriteViewController: FavouriteCellDelegate {
     func didTapLikeBeer(isLiked: Bool, beerId: String) {
         
         if isLiked {
@@ -127,7 +127,7 @@ extension FavouriteViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteViewControllerCell", for: indexPath) as? FavouriteViewControllerCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCell", for: indexPath) as? FavouriteCell else {
             return .init();
         }
         let favouriteCell = favouriteProduct[indexPath.item]

@@ -294,9 +294,9 @@ final class AddBeerViewController: UIViewController {
             popupView.layer.borderColor = UIColor.red.cgColor
             popupView.isHidden = false
             fadeIn()
-            
             return
         }
+        
         
         let image = userImage.image?.jpegData(compressionQuality: 1.0)
         guard let beerName = beerNameTextView.text,
@@ -324,12 +324,23 @@ final class AddBeerViewController: UIViewController {
                 self?.successImage.image = UIImage(named: "successIcon")
                 self?.successImage.tintColor = .primary
                 self?.fadeIn()
+                self?.defaultTextFiewld()
             case .failure(let error):
                 print(error)
             }
         }
     }
+    
+    func defaultTextFiewld() {
+        beerNameTextView.text = "Name"
+        beerSortTextView.text = "Sort"
+        beerCountryTextView.text = "Country"
+        beerDescriptionTextView.text = "Write a few words about this drink"
+        beerPriceTextView.text = ""
+    }
 }
+
+
 
 extension AddBeerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {

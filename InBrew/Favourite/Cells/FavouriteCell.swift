@@ -1,5 +1,5 @@
 //
-//  FavouriteViewControllerCell.swift
+//  FavouriteCell.swift
 //  InBrew
 //
 //  Created by golub_dobra on 24.11.2021.
@@ -9,11 +9,11 @@ import UIKit
 import PinLayout
 import Kingfisher
 
-protocol FavouriteViewControllerCellDelegate: AnyObject {
+protocol FavouriteCellDelegate: AnyObject {
     func didTapLikeBeer(isLiked: Bool, beerId: String)
 }
 
-final class FavouriteViewControllerCell: UICollectionViewCell {
+final class FavouriteCell: UICollectionViewCell {
     private let beerImage = UIImageView()
     private let beerNameLabel = UILabel()
     private let beerDescriptionLabel = UILabel()
@@ -21,7 +21,7 @@ final class FavouriteViewControllerCell: UICollectionViewCell {
     private let likeBeerButton = UIButton()
     private let model: ImageLoaderProtocol = ImageLoader.shared
     private var beerId: String = ""
-    weak var delegate: FavouriteViewControllerCellDelegate?
+    weak var delegate: FavouriteCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
