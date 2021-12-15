@@ -10,7 +10,7 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     private let homeViewController = UINavigationController(rootViewController: HomeViewController())
     private let categoriesViewController = UINavigationController(rootViewController: CategoriesViewController())
-    private let addBeerViewController = UINavigationController(rootViewController: AddBeerViewController())
+    private let addBeerViewController = AddBeerViewController()
     private let favouriteViewController = UINavigationController(rootViewController: FavouriteViewController())
     private let profileViewController = UINavigationController(rootViewController: ProfileViewController())
     

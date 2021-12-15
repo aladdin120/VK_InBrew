@@ -9,7 +9,7 @@ import UIKit
 import PinLayout
 
 final class BeerCardViewController: UIViewController {
-//    private let maxRating = 5
+    private var reviewsProduct: [ReviewModel] = []
     private let scrollView = UIScrollView()
     private let beerImageView = UIImageView()
     private let beerTitleLabel = UILabel()
@@ -51,7 +51,7 @@ final class BeerCardViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .background
-        
+        getReviews()
         scrollView.alwaysBounceVertical = true
         
         beerImageView.contentMode = .scaleAspectFit
@@ -305,6 +305,7 @@ final class BeerCardViewController: UIViewController {
     
     @objc
     func didTapLikeButton() {
+        animateButtonOpacity(button: likeOfBeerButton)
         guard let productId = product?.id else {
             print("[DEBUG]: Not find product id!")
             return
@@ -347,6 +348,36 @@ final class BeerCardViewController: UIViewController {
             case .failure(_):
                 return
             }
+        }
+    }
+    
+    func getReviews() {
+        guard let beerId = product?.id else {
+            return
+        }
+        databaseModel.getBeerReviewFromDatabase(beerId: beerId) {[weak self] result in
+            switch result {
+            case .success(let productReviews):
+                self?.reviewsProduct = productReviews
+                self?.getNumberOfRatingStar()
+                
+            case .failure(let error):
+                print("[DEBUG]: \(error)")
+                return
+            }
+        }
+    }
+    
+    func getNumberOfRatingStar() {
+        let result: Int =  reviewsProduct.reduce(0, {
+            acc, cur in
+            acc + cur.rating
+        })
+        if result > 0 {
+            let intCount = Int(roundf(Float(result / reviewsProduct.count)))
+            starsModule.rating = intCount
+        } else {
+            starsModule.rating = 0
         }
     }
 }

@@ -32,7 +32,7 @@ final class ReviewsViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ReviewsViewControllerCell.self, forCellReuseIdentifier: "ReviewsViewControllerCell")
+        tableView.register(ReviewsCell.self, forCellReuseIdentifier: "ReviewsCell")
         tableView.separatorStyle = .none
         
         activityIndicator.hidesWhenStopped = true
@@ -92,7 +92,7 @@ extension ReviewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewsViewControllerCell", for: indexPath) as? ReviewsViewControllerCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewsCell", for: indexPath) as? ReviewsCell else {
             return .init();
         }
         

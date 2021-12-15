@@ -10,6 +10,7 @@ import PinLayout
 
 final class ReviewViewController: UIViewController {
     private let userNameLabel = UILabel()
+    private let starsModule = StarsModule(frame: CGRect(x: 0, y: 30, width: Int((5*starSize) + (4*starSpasing)), height: Int(starSize)))
     private let userReviewImageView = UIImageView(image: UIImage())
     private let poductReviewImageView = UIImageView(image: UIImage())
     private let productReviewTextLabel = UILabel()
@@ -54,6 +55,7 @@ final class ReviewViewController: UIViewController {
         configure(with: review)
         
         [userNameLabel,
+         starsModule,
          userReviewImageView,
          poductReviewImageView,
          productReviewTextLabel,
@@ -64,7 +66,7 @@ final class ReviewViewController: UIViewController {
     }
     
     func configure(with review: ReviewModel) {
-        
+        starsModule.rating = review.rating
         userNameLabel.text = review.name
         productReviewTextLabel.text = review.review
         model.getReviewImage(reviewId: review.id) {[weak self] result in
@@ -115,9 +117,16 @@ final class ReviewViewController: UIViewController {
             .above(of: productReviewTextLabel)
             .marginBottom(40)
             .marginLeft(21)
-            .right()
+            .right(130)
             .marginRight(21)
             .sizeToFit(.width)
+        
+        starsModule.pin
+            .above(of: productReviewTextLabel)
+            .after(of: userNameLabel)
+            .marginLeft(17)
+            .marginBottom(40)
+            .sizeToFit()
         
         container.pin
             .wrapContent(.vertically)
